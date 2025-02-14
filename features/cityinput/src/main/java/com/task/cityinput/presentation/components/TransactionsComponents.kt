@@ -34,12 +34,11 @@ import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.task.core.R
-import com.task.cityinput.domin.entity.HistoryUi
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-internal fun TransactionsItem(item: HistoryUi, onItemClicked: (() -> Unit?)?) {
+internal fun TransactionsItem( onItemClicked: (() -> Unit?)?) {
     Card(
         modifier = Modifier.padding(vertical = 10.dp),
         shape = RoundedCornerShape(12.dp),
@@ -69,7 +68,7 @@ internal fun TransactionsItem(item: HistoryUi, onItemClicked: (() -> Unit?)?) {
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = item.challengeName ?: "",
+                    text =  "",
                     style = TextStyle(
                         fontWeight = FontWeight.W600,
                         color = Color.Black,
@@ -77,14 +76,14 @@ internal fun TransactionsItem(item: HistoryUi, onItemClicked: (() -> Unit?)?) {
                     )
                 )
                 RowWithImage(
-                    title = item.rewardsCount + " Rewards",
+                    title = " Rewards",
                     titleSize = 14.sp,
                     titleColor = R.color.dark_blue,
                     image = R.drawable.ic_gift_challenges_history,
                     imageSize = 18.dp,
                     titleFontWeight = FontWeight.W500
                 )
-                RowVouchersAndPoints(item = item)
+//                RowVouchersAndPoints(item = item)
             }
         }
     }
@@ -123,53 +122,53 @@ fun RowWithImage(
     }
 }
 
-@Composable
-fun RowVouchersAndPoints(
-    item: HistoryUi
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        RowWithImage(
-            title = item.points + " Points",
-            titleSize = 12.sp,
-            titleColor = R.color.text_gray,
-            image = R.drawable.ic_points_challenges_history,
-            imageSize = 13.dp,
-            titleFontWeight = FontWeight.W500
-        )
-        Surface(modifier = Modifier.width(10.dp)) {}
-        RowWithImage(
-            title = item.vouchers + " Vouchers",
-            titleSize = 12.sp,
-            titleColor = R.color.text_gray,
-            image = R.drawable.ic_vouchers_challenges_history,
-            imageSize = 13.dp,
-            titleFontWeight = FontWeight.W500
-        )
-    }
-}
+//@Composable
+//fun RowVouchersAndPoints(
+//    item: HistoryUi
+//) {
+//    Row(
+//        modifier = Modifier.fillMaxWidth(),
+//        verticalAlignment = Alignment.CenterVertically,
+//    ) {
+//        RowWithImage(
+//            title = item.points + " Points",
+//            titleSize = 12.sp,
+//            titleColor = R.color.text_gray,
+//            image = R.drawable.ic_points_challenges_history,
+//            imageSize = 13.dp,
+//            titleFontWeight = FontWeight.W500
+//        )
+//        Surface(modifier = Modifier.width(10.dp)) {}
+//        RowWithImage(
+//            title = item.vouchers + " Vouchers",
+//            titleSize = 12.sp,
+//            titleColor = R.color.text_gray,
+//            image = R.drawable.ic_vouchers_challenges_history,
+//            imageSize = 13.dp,
+//            titleFontWeight = FontWeight.W500
+//        )
+//    }
+//}
 
 
 @Preview
 @Composable
 fun PreviewForTransactionsItem(
 ) {
-    val item = HistoryUi(
-        id = "1",
-        challengeName = "two gift",
-        rewardsCount = "2",
-        points = "200",
-        vouchers = "3"
-    )
-
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-            .padding(20.dp)
-    ) {
-        TransactionsItem(item = item, onItemClicked = null)
-    }
+//    val item = HistoryUi(
+//        id = "1",
+//        challengeName = "two gift",
+//        rewardsCount = "2",
+//        points = "200",
+//        vouchers = "3"
+//    )
+//
+//    Box(
+//        modifier = Modifier
+//            .background(Color.White)
+//            .padding(20.dp)
+//    ) {
+//        TransactionsItem(item = item, onItemClicked = null)
+//    }
 
 }

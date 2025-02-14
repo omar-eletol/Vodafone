@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="com.task.cityinput.presentation.TransactionsFragment"
+        android:name="com.task.cityinput.presentation.CityInputFragment"
         android:label="TransactionsFragment" />
 
 

@@ -44,7 +44,7 @@ android {
             dimension = "version"
             versionNameSuffix = ".Staging"
             buildConfigField(
-                "String", "baseUrl", "\"https://run.mocky.io\""
+                "String", "baseUrl", "\"https://api.openweathermap.org/\""
             )
         }
     }

@@ -2,8 +2,8 @@ package com.task.data.di
 
 
 import com.task.data.network.service.ApiService
-import com.task.data.repository.HistoryRepository
-import com.task.data.repository.HistoryRepositoryImpl
+import com.task.data.repository.Repository
+import com.task.data.repository.RepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +16,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepository(apiService: ApiService): HistoryRepository {
-        return HistoryRepositoryImpl(apiService = apiService)
+    fun provideRepository(apiService: ApiService): Repository {
+        return RepositoryImpl(apiService = apiService)
     }
 
 }

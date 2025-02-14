@@ -21,7 +21,7 @@ android {
             buildConfigField(
                 "String",
                 "baseUrl",
-                "\"https://run.mocky.io\""
+                "\"https://api.openweathermap.org/\""
             )
         }
         release {
@@ -29,7 +29,7 @@ android {
             buildConfigField(
                 "String",
                 "baseUrl",
-                "\"https://run.mocky.io\""
+                "\"https://api.openweathermap.org/\""
             )
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
