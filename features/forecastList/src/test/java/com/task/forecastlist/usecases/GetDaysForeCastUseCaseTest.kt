@@ -68,7 +68,7 @@ class GetDaysForeCastUseCaseTest {
 
             val result = getDaysForeCastUseCase.invoke(lat = "", lon = "")
             assertEquals(
-                mockGetDaysForeCastResponse, result
+                listOf(mockGetDaysForeCastResponse) , result
             )
         }
     }
