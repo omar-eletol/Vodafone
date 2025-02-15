@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+//    implementation(project(":displayingCustomWeatherIcons"))
+    implementation(libs.displayingcustomweathericons)
     implementation(libs.material)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.timber)

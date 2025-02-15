@@ -53,7 +53,7 @@ fun EditTextWithButton(
             ),
             onClick = {
                 focusManager.clearFocus()
-                onButtonClicked?.invoke(text)
+                onButtonClicked.invoke(text)
             },
             enabled = text.isNotEmpty() && convertCityNameState != ConvertCityNameState.Loading && getWeatherDataState != GetWeatherDataState.Loading
         ) {

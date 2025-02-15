@@ -27,6 +27,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.task.core.R
+import com.task.displayingcustomweathericons.weatherIcon
 
 
 @Composable
@@ -125,15 +126,5 @@ fun WeatherCard(
 
 }
 
-fun weatherIcon(weatherCondition: String): Int {
-    val weatherDrawable = when (weatherCondition.lowercase()) {
-        "clear" -> R.drawable.ic_sunny
-        "clouds" -> R.drawable.ic_clouds
-        "rain" -> R.drawable.ic_rain
-        "snow" -> R.drawable.ic_snow
-        else -> R.drawable.ic_empty_response // Default icon
-    }
-    return weatherDrawable
-}
 
 

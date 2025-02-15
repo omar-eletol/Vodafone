@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+
     }
 }
 dependencyResolutionManagement {
@@ -16,7 +17,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/omar-eletol/Vodafone")
+            credentials {
+                username = "omar-eletol"
+            }
+        }
     }
+
 }
 
 rootProject.name = "Vodafone"
@@ -26,3 +34,4 @@ include(":data")
 include(":features")
 include(":features:cityinput")
 include(":features:forecastList")
+include(":displayingCustomWeatherIcons")
