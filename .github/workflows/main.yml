@@ -52,8 +52,8 @@ jobs:
         with:
           name: apk-artifacts
           path: |
-            app/build/outputs/apk/debug/*.apk
-            app/build/outputs/apk/release/*.apk
+            # app/build/outputs/apk/debug/*.apk
+            app/build/outputs/apk/Staging/release/*.apk
             app/build/outputs/apk/Staging/debug/*.apk
             
     env:
