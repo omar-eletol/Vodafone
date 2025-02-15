@@ -30,7 +30,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Set JVM Target to 11
-        run: echo "org.gradle.jvmargs=-Xmx4g -Dkotlin.daemon.jvm.options=-Xmx2g -Dkotlin.compiler.jvmTarget=11" >> gradle.properties
+        run: |
+          echo "" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx4g -Dkotlin.daemon.jvm.options=-Xmx2g -Dkotlin.compiler.jvmTarget=11" >> gradle.properties
 
       - name: Run Lint
         run: ./gradlew lint
