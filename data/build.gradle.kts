@@ -58,6 +58,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.security.crypto.ktx)
 
+    // Testing dependencies
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
