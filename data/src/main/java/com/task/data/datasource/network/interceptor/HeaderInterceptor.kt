@@ -1,7 +1,7 @@
-package com.task.data.network.interceptor
+package com.task.data.datasource.network.interceptor
 
-import com.task.data.pref.Pref
-import com.task.data.pref.PrefImp.getToken
+import com.task.data.datasource.pref.Pref
+import com.task.data.datasource.pref.PrefImp.getToken
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

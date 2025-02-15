@@ -1,8 +1,8 @@
 package com.task.data.di
 
 
-import com.task.data.database.WeatherDao
-import com.task.data.network.service.ApiService
+import com.task.data.datasource.database.WeatherDao
+import com.task.data.datasource.network.service.ApiService
 import com.task.data.repository.Repository
 import com.task.data.repository.RepositoryImpl
 import dagger.Module

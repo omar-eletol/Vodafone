@@ -1,7 +1,7 @@
-package com.task.data.network.interceptor
+package com.task.data.datasource.network.interceptor
 
 import android.content.Context
-import com.task.data.pref.Pref
+import com.task.data.datasource.pref.Pref
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel

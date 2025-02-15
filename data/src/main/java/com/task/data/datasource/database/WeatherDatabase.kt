@@ -1,4 +1,4 @@
-package com.task.data.database
+package com.task.data.datasource.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

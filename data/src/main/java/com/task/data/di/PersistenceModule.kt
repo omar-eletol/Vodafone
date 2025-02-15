@@ -1,7 +1,7 @@
 package com.task.data.di
 
 import android.content.Context
-import com.task.data.pref.Pref
+import com.task.data.datasource.pref.Pref
 
 import dagger.Module
 import dagger.Provides

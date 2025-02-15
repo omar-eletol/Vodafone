@@ -2,8 +2,8 @@ package com.task.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.task.data.database.WeatherDao
-import com.task.data.database.WeatherDatabase
+import com.task.data.datasource.database.WeatherDao
+import com.task.data.datasource.database.WeatherDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

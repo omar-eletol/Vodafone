@@ -1,11 +1,11 @@
 package com.task.data.repository
 
-import com.task.data.database.WeatherDao
+import com.task.data.datasource.database.WeatherDao
 import com.task.data.entities.CityWeatherEntity
 import com.task.data.entities.ConvertCityNameResponseItem
 import com.task.data.entities.GetDaysForeCastResponse
 import com.task.data.entities.GetWeatherData
-import com.task.data.network.service.ApiService
+import com.task.data.datasource.network.service.ApiService
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(

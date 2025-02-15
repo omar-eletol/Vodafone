@@ -1,13 +1,13 @@
-package com.task.data.network.service
+package com.task.data.datasource.network.service
 
 
 import com.task.data.entities.ConvertCityNameResponseItem
 import com.task.data.entities.GetDaysForeCastResponse
 import com.task.data.entities.GetWeatherData
-import com.task.data.network.EndPoint.APP_ID
-import com.task.data.network.EndPoint.CITY_NAME_CONVERTER
-import com.task.data.network.EndPoint.GET_7_DAYS_FORECAST
-import com.task.data.network.EndPoint.GET_CITY_WEATHER_DATA
+import com.task.data.datasource.network.EndPoint.APP_ID
+import com.task.data.datasource.network.EndPoint.CITY_NAME_CONVERTER
+import com.task.data.datasource.network.EndPoint.GET_7_DAYS_FORECAST
+import com.task.data.datasource.network.EndPoint.GET_CITY_WEATHER_DATA
 import retrofit2.http.GET
 import retrofit2.http.Query
 

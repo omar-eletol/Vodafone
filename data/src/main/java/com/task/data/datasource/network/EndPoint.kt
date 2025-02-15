@@ -1,4 +1,4 @@
-package com.task.data.network
+package com.task.data.datasource.network
 
 
 object EndPoint {

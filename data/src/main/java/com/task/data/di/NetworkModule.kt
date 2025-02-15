@@ -1,10 +1,10 @@
 package com.task.data.di
 
 
-import com.task.data.network.EndPoint
-import com.task.data.network.interceptor.HeaderInterceptor
-import com.task.data.network.interceptor.StatusCodeInterceptor
-import com.task.data.network.service.ApiService
+import com.task.data.datasource.network.EndPoint
+import com.task.data.datasource.network.interceptor.HeaderInterceptor
+import com.task.data.datasource.network.interceptor.StatusCodeInterceptor
+import com.task.data.datasource.network.service.ApiService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
