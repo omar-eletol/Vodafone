@@ -53,4 +53,13 @@ dependencies {
     compileOnly(libs.assisted.inject.annotations.dagger2)
     kapt(libs.assisted.inject.processor.dagger2)
 
+    // Testing dependencies
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit.v121)
+    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+
 }
