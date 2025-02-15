@@ -6,6 +6,4 @@ import androidx.annotation.Keep
 data class ConvertCityNameResponseItem(
     val lat: Double,
     val lon: Double,
-    val name: String,
-    val state: String,
 )

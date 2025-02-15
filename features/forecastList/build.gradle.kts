@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.task.cityinput"
+    namespace = "com.task.forecastlist"
     compileSdk = 34
 
     defaultConfig {
@@ -25,11 +26,13 @@ android {
             )
         }
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
         viewBinding = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -43,6 +46,7 @@ android {
 }
 
 dependencies {
+
     implementation(project(":data"))
     implementation(project(":core"))
 
@@ -64,11 +68,11 @@ dependencies {
     // navigation / liveData / viewmodel
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+
     // swipe
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.accompanist.swiperefresh)
-    implementation(libs.androidx.navigation.fragment.ktx)
-
 
 
     // hilt

@@ -64,6 +64,7 @@ android {
 
 dependencies {
     implementation(project(":features:cityinput"))
+    implementation(project(":features:forecastList"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)

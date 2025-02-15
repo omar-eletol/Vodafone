@@ -20,5 +20,5 @@ interface Repository {
     suspend fun getDaysForecast(
         lat: String,
         lon: String
-    ): List<GetDaysForeCastResponse>?
+    ): GetDaysForeCastResponse?
 }

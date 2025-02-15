@@ -2,18 +2,31 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/transactionsFragment">
+    app:startDestination="@id/cityInputFragment">
 
     <fragment
-        android:id="@+id/transactionsFragment"
+        android:id="@+id/cityInputFragment"
         android:name="com.task.cityinput.presentation.CityInputFragment"
-        android:label="TransactionsFragment" />
+        android:label="TransactionsFragment" >
+        <action
+            android:id="@+id/action_cityInputFragment_to_foreCastListFragment"
+            app:destination="@id/foreCastListFragment" />
+    </fragment>
 
 
-    <dialog
-        android:id="@+id/ChallengeDetailsBottomSheet"
-        android:name="com.task.cityinput.presentation.bottomSheets.ChallengeDetailsBottomSheet"
-        android:label="FindMerchantSheet">
+    <fragment
+        android:id="@+id/foreCastListFragment"
+        android:name="com.task.forecastlist.presentation.ForeCastListFragment"
+        android:label="TransactionsFragment">
+        <argument
+            android:name="lat"
+            android:defaultValue=""
+            app:argType="string" />
 
-    </dialog>
+        <argument
+            android:name="lon"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
 </navigation>

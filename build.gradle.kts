@@ -4,5 +4,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("com.google.dagger.hilt.android") version "2.46" apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.navigation.safe.args) apply false
 
 }

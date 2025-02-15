@@ -35,13 +35,13 @@ fun WeatherCard(
     mainWeather: String,
     feelsLike: String,
     windSpeed: String,
+    cityName: String,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -57,7 +57,7 @@ fun WeatherCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Image(
-                        painterResource(R.drawable.ic_empty_response),
+                        painterResource(weatherIcon(weatherCondition = mainWeather)),
                         contentDescription = "",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.size(50.dp)
@@ -106,11 +106,34 @@ fun WeatherCard(
                             fontSize = 14.sp, color = Color.Gray
                         )
                     )
+                    if (cityName.isNotBlank()) {
+                        Text(
+                            "City name: $cityName",
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.End,
+                            style = TextStyle(
+                                fontSize = 14.sp, color = Color.Gray
+                            )
+                        )
+                    }
+
                 }
             }
         }
     }
 
+}
+
+fun weatherIcon(weatherCondition: String): Int {
+    val weatherDrawable = when (weatherCondition.lowercase()) {
+        "clear" -> R.drawable.ic_sunny
+        "clouds" -> R.drawable.ic_clouds
+        "rain" -> R.drawable.ic_rain
+        "snow" -> R.drawable.ic_snow
+        else -> R.drawable.ic_empty_response // Default icon
+    }
+    return weatherDrawable
 }
 
 

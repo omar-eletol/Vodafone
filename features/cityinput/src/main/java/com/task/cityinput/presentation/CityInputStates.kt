@@ -4,7 +4,7 @@ import com.task.data.entities.ConvertCityNameResponseItem
 import com.task.data.entities.GetWeatherData
 
 
-internal sealed class ConvertCityNameState {
+sealed class ConvertCityNameState {
     data class Success(val data: List<ConvertCityNameResponseItem>) : ConvertCityNameState()
     data class Error(val throwable: Throwable, val errorBody: String?) : ConvertCityNameState()
     data object Loading : ConvertCityNameState()
@@ -12,7 +12,7 @@ internal sealed class ConvertCityNameState {
     data object Empty : ConvertCityNameState()
 }
 
-internal sealed class GetWeatherDataState {
+sealed class GetWeatherDataState {
     data class Success(val data: GetWeatherData) : GetWeatherDataState()
     data class Error(val throwable: Throwable, val errorBody: String?) : GetWeatherDataState()
     data object Loading : GetWeatherDataState()

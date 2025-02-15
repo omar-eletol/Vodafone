@@ -1,57 +1,31 @@
 package com.task.cityinput.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,18 +33,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.task.core.R
+import com.task.cityinput.R
+import com.task.cityinput.presentation.components.EditTextWithButton
 import com.task.core.mainComponents.CustomShimmerEffect
 import com.task.core.mainComponents.EmptyView
 import com.task.core.mainComponents.MainAppBar
 import com.task.core.mainComponents.WeatherCard
 import com.task.core.theme.Navy80
+import com.task.core.utils.NavigationUtil.navigateTo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 internal class CityInputFragment : Fragment() {
 
-    private val viewModel: ChallengesHistoryViewModel by viewModels()
+    private val viewModel: CityInputViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -78,7 +54,7 @@ internal class CityInputFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 Box(Modifier.safeDrawingPadding()) {
-                    ChallengesHistoryScreen(
+                    CityInputScreen(
                         viewModel = viewModel,
                         onBackClicked = {
                             activity?.onBackPressedDispatcher?.onBackPressed()
@@ -86,25 +62,22 @@ internal class CityInputFragment : Fragment() {
                         onButtonClicked = { cityName ->
                             convertCityName(cityName = cityName);
                         },
+                        showForecastClicked = { lat, lon ->
+                            Log.e("showForecastClicked", "showForecastClicked: " + lat)
+                            navigateTo(
+                                com.task.core.R.id.action_cityInputFragment_to_foreCastListFragment,
+                                args = Bundle().apply {
+                                    putString("lat", lat)
+                                    putString("lon", lon)
+                                },
+                            )
+                        }
                     )
                 }
             }
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.actions.collect { action ->
-//                when (action) {
-//                    ChallengesHistoryActions.FetchPointsToBeExpiredList -> fetchPointsToBeExpiredList()
-//                    ChallengesHistoryActions.SwipeRefreshCalled -> fetchPointsToBeExpiredList()
-//                }
-//            }
-//        }
-//        viewModel.emitAction(ChallengesHistoryActions.FetchPointsToBeExpiredList)
-    }
 
     private fun convertCityName(cityName: String) {
         viewModel.convertCityName(cityName = cityName)
@@ -114,16 +87,16 @@ internal class CityInputFragment : Fragment() {
 }
 
 @Composable
-private fun ChallengesHistoryScreen(
-    viewModel: ChallengesHistoryViewModel,
+private fun CityInputScreen(
+    viewModel: CityInputViewModel,
     onBackClicked: (() -> Unit?)?,
-    onButtonClicked: ((String) -> Unit)?
+    onButtonClicked: ((String) -> Unit)?,
+    showForecastClicked: ((String, String) -> Unit)?
 
 ) {
     val getWeatherDataState by viewModel.getWeatherDataState.collectAsState()
     val convertCityNameState by viewModel.convertCityNameState.collectAsState()
 
-    var text by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
     Scaffold(
@@ -139,43 +112,27 @@ private fun ChallengesHistoryScreen(
             })
         },
     ) { innerPadding ->
-        Column(Modifier.padding(horizontal = 16.dp)) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(innerPadding),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                OutlinedTextField(
-                    maxLines = 1,
-                    value = text,
-                    onValueChange = { text = it },
-                    modifier = Modifier.weight(1f),
-                    label = { Text("city name,country code") },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Navy80,
-                        focusedLabelColor = Navy80,
-                    ),
-                )
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Navy80,
-                    ),
-                    onClick = {
-                        focusManager.clearFocus()
-                        onButtonClicked?.invoke(text)
-                    },
-                    enabled = text.isNotEmpty() && convertCityNameState != ConvertCityNameState.Loading && getWeatherDataState != GetWeatherDataState.Loading
-                ) {
-                    Text("Search")
-                }
-
-            }
+        Column(
+            Modifier
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp)
+        ) {
+            EditTextWithButton(
+                onButtonClicked = { text ->
+                    onButtonClicked?.invoke(text)
+                },
+                focusManager = focusManager,
+                getWeatherDataState = getWeatherDataState,
+                convertCityNameState = convertCityNameState
+            )
             Spacer(modifier = Modifier.height(20.dp))
             CityInputContent(
                 getWeatherDataState = getWeatherDataState,
                 convertCityNameState = convertCityNameState,
+                showForecastClicked = { lat, lon ->
+                    showForecastClicked?.invoke(lat, lon)
+
+                }
             )
 
 
@@ -190,8 +147,9 @@ private fun ChallengesHistoryScreen(
 private fun CityInputContent(
     getWeatherDataState: GetWeatherDataState,
     convertCityNameState: ConvertCityNameState,
+    showForecastClicked: ((String, String) -> Unit)?
 
-    ) {
+) {
     when (convertCityNameState) {
         ConvertCityNameState.Empty -> {
             EmptyView(title = "There is no weather right now please add your city name")
@@ -211,24 +169,49 @@ private fun CityInputContent(
         }
 
         is ConvertCityNameState.Success -> {
-            GetWeatherDataState(getWeatherDataState = getWeatherDataState)
+            HandleWeatherDataState(
+                getWeatherDataState = getWeatherDataState,
+                showForecastClicked = { lat, lon ->
+                    showForecastClicked?.invoke(lat, lon)
+                },
+            )
         }
     }
 }
 
 
 @Composable
-private fun GetWeatherDataState(
+private fun HandleWeatherDataState(
     getWeatherDataState: GetWeatherDataState,
+    showForecastClicked: ((String, String) -> Unit)?
 
-    ) {
+) {
     when (getWeatherDataState) {
         is GetWeatherDataState.Success -> {
+            Text(
+                "Show Forecast 7 day",
+                modifier = Modifier.clickable {
+                    showForecastClicked?.invoke(
+                        getWeatherDataState.data.coord.lat.toString(),
+                        getWeatherDataState.data.coord.lon.toString(),
+                    )
+                },
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End,
+                style = TextStyle(
+                    fontSize = 14.sp, color = Navy80,
+                    fontWeight = FontWeight(700)
+                )
+
+            )
+            Spacer(modifier = Modifier.height(10.dp))
             WeatherCard(
                 temperature = getWeatherDataState.data.main.temp.toString(),
                 mainWeather = getWeatherDataState.data.weather.firstOrNull()?.main ?: "",
                 feelsLike = getWeatherDataState.data.main.feels_like.toString(),
                 windSpeed = getWeatherDataState.data.wind.speed.toString(),
+                cityName = getWeatherDataState.data.name,
             )
         }
 
@@ -255,74 +238,13 @@ private fun GetWeatherDataState(
 }
 
 
-//@Composable
-//private fun ChallengesHistoryContent(
-//    state: ChallengesHistoryState, onItemClicked: (() -> Unit?)?
-//) {
-//
-//    Box(
-//        modifier = Modifier.padding(16.dp)
-//    ) {
-//        when (state) {
-//            is ChallengesHistoryState.Success -> {
-//                LazyColumn {
-//                    items(state.data) { item ->
-//                        TransactionsItem(item = item) { onItemClicked?.invoke() }
-//                    }
-//                }
-//            }
-//
-//            is ChallengesHistoryState.Loading -> {}
-//            is ChallengesHistoryState.Empty -> {
-//                LazyColumn(Modifier.fillMaxSize()) {
-//                    item {
-//                        Text(
-//                            text = "EMPTY LIST",
-//                            modifier = Modifier.align(Alignment.Center),
-//                        )
-//                    }
-//                }
-//            }
-//
-//            is ChallengesHistoryState.Error -> {
-//                LazyColumn(Modifier.fillMaxSize()) {
-//                    item {
-//                        Text(
-//                            text = "ERROR SCREEN",
-//                            modifier = Modifier.align(Alignment.Center),
-//                        )
-//                    }
-//                }
-//            }
-//
-//            is ChallengesHistoryState.Idle -> {
-////                val item = HistoryResponse(
-////                    id = "1",
-////                    challengeName = "safda",
-////                    rewardsCount = "2",
-////                    points = "200",
-////                    vouchers = "3",
-////                    dummy1 = "200",
-////                    dummy2 = "200",
-////                    dummy3 = "200",
-////                )
-////                LazyColumn {
-////                    items(5) {
-////                        TransactionsItem(item = item, onItemClicked = { onItemClicked?.invoke() })
-////                    }
-////                }
-//            }
-//        }
-//    }
-//}
-
-
 @Preview
 @Composable
 fun Preview(
 ) {
-//    ChallengesHistoryContent(
-//        state = ChallengesHistoryState.Idle, onItemClicked = null
-//    )
+    HandleWeatherDataState(
+        getWeatherDataState = GetWeatherDataState.Idle,
+        showForecastClicked = null
+    )
 }
 

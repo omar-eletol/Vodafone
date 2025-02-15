@@ -5,10 +5,16 @@ import androidx.annotation.Keep
 @Keep
 data class GetWeatherData(
     val id: Int,
+    val coord: Coord,
     val main: Main,
     val name: String,
     val weather: List<Weather>,
     val wind: Wind
+)
+
+data class Coord(
+    val lon: Double,
+    val lat: Double,
 )
 
 data class Main(

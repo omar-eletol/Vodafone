@@ -12,18 +12,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-internal class ChallengesHistoryViewModel @Inject constructor(
+internal class CityInputViewModel @Inject constructor(
     private val convertCityNameUseCase: ConvertCityNameUseCase,
     private val getWeatherDataUseCase: GetWeatherDataUseCase,
 ) : ViewModel(
 ) {
-
-//    private val _actions = Channel<ChallengesHistoryActions>()
-//    val actions = _actions.receiveAsFlow()
-//
-//    fun emitAction(action: ChallengesHistoryActions) = viewModelScope.launch(Dispatchers.IO) {
-//        _actions.send(action)
-//    }
 
 
     private val _convertCityNameState =

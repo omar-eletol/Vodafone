@@ -37,7 +37,7 @@ interface ApiService {
         @Query("lon") lon: String,
         @Query("units") units: String = "metric",
         @Query("cnt") cnt: Int = 7,
-    ): List<GetDaysForeCastResponse>
+    ): GetDaysForeCastResponse
 
 
 }

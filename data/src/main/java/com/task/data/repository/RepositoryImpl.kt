@@ -19,7 +19,7 @@ class RepositoryImpl @Inject constructor(
         return apiService.getWeatherData(lat = lat, lon = lon)
     }
 
-    override suspend fun getDaysForecast(lat: String, lon: String): List<GetDaysForeCastResponse> {
+    override suspend fun getDaysForecast(lat: String, lon: String): GetDaysForeCastResponse {
         return apiService.getDaysForecast(lat = lat, lon = lon)
     }
 }
