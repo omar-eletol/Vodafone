@@ -21,6 +21,7 @@ dependencyResolutionManagement {
             url = uri("https://maven.pkg.github.com/omar-eletol/Vodafone")
             credentials {
                 username = "omar-eletol"
+                password = System.getenv("GITHUB_TOKEN") ?: ""
             }
         }
     }
