@@ -78,6 +78,11 @@ internal class CityInputFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getStoredWeatherData()
+    }
+
 
     private fun convertCityName(cityName: String) {
         viewModel.convertCityName(cityName = cityName)

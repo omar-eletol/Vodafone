@@ -1,6 +1,7 @@
 package com.task.data.di
 
 
+import com.task.data.database.WeatherDao
 import com.task.data.network.service.ApiService
 import com.task.data.repository.Repository
 import com.task.data.repository.RepositoryImpl
@@ -16,8 +17,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepository(apiService: ApiService): Repository {
-        return RepositoryImpl(apiService = apiService)
+    fun provideRepository(apiService: ApiService, weatherDao: WeatherDao): Repository {
+        return RepositoryImpl(apiService = apiService, weatherDao = weatherDao)
     }
 
 }

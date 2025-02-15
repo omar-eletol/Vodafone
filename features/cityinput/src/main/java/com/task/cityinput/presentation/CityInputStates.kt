@@ -5,7 +5,7 @@ import com.task.data.entities.GetWeatherData
 
 
 sealed class ConvertCityNameState {
-    data class Success(val data: List<ConvertCityNameResponseItem>) : ConvertCityNameState()
+    data class Success(val data: List<ConvertCityNameResponseItem>?) : ConvertCityNameState()
     data class Error(val throwable: Throwable, val errorBody: String?) : ConvertCityNameState()
     data object Loading : ConvertCityNameState()
     data object Idle : ConvertCityNameState()
